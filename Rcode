@@ -122,6 +122,6 @@ m <- simple_triplet_matrix(i = chmatch(kor_morph[,word], terms),
                            nrow = length(terms), ncol = length(docs),
                            dimnames = list(Terms = terms, Docs = docs))
 
-# weighting options (weightTf/weightBin/weightTfIdf)
+# weighting options ( weightTf / weightBin / weightTfIdf )
 dtm <- t(as.TermDocumentMatrix(m, weighting = weightTf))
 
