@@ -70,7 +70,7 @@ library(RcppMeCab)
 library(tidytext)
 library(RmecabKo)
 
-## 최초 1번만 설치 실행
+## 최초 1번만 실행하여 설치 진행
 # install_mecab("C:/mecab")
 
 # set term/doc
