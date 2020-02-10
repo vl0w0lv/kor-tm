@@ -94,3 +94,4 @@ m <- simple_triplet_matrix(i = chmatch(kor_morph[,word], terms),
                            dimnames = list(Terms = terms, Docs = docs))
 rm(terms, docs)
 dtm <- t(as.TermDocumentMatrix(m, weighting = weightTf))
+
