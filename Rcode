@@ -1,0 +1,96 @@
+
+# 텍스트 생성
+t_text <- c("테스트입니다.", "어떤가요?")
+
+# =========================== #
+# 1. Komoran 모듈 사용(Python)
+# =========================== #
+## 파이썬 모듈 설치
+# shell("pip install nltk")
+# shell("pip install konlpy")
+# shell("pip install numpy")
+library(reticulate)
+library(data.table)
+
+# 형태소 분석기 모듈 로드
+py_run_string(paste("from konlpy.tag import Komoran;", "komoran = Komoran();"))
+
+# 형태소 분석
+py_run_string("text_py = list(map(komoran.pos, r.t_text));")
+
+# R 객체로 결과값 불러오기
+text_r <- py$text_py
+
+# garbage collection
+py_run_string("del text_py")
+py_gc <- import("gc")
+py_gc$collect()
+
+# 결과값 정제(NN:명사, NP:대명사, VV:동사, VA:형용사, SL:외국어, SH:한자, SN:숫자)
+# 품사표 참조 : https://docs.komoran.kr/firststep/postypes.html
+kor_morph <- lapply(text_r, function(x){
+  o <- sapply(x, "[[", 1)
+  names(o) <- sapply(x, "[[", 2)
+  o
+})
+
+# data.table로 변환
+kor_morph <- data.table(doc_id = rep(seq_along(kor_morph), times = sapply(kor_morph, length)),
+                         word = unlist(kor_morph), type = names(unlist(kor_morph)))
+
+# =========================== #
+# 2. RcppMeCab 패키지 사용(은전한닢 프로젝트)
+# =========================== #
+library(data.table)
+library(dplyr)
+library(RcppMeCab)
+library(tidytext)
+
+# set term/doc
+t_text <- enc2utf8(t_text)
+text_tab <- data.table(doc_id = seq_along(t_text), txt = t_text)
+kor_morph2 <- text_tab %>% unnest_tokens(word, txt, token=pos, to_lower=F)
+kor_morph2[["type"]] <- kor_morph2[,tstrsplit(word, "/")[[2]]]
+kor_morph2[,word:=tstrsplit(word, "/")[[1]]]
+
+# =========================== #
+# 부록 : RmecabKo 패키지 사용
+# =========================== #
+library(RmecabKo)
+library(dplyr)
+
+# 명사 추출
+t_text %>% enc2native %>% nouns
+
+# 단어 추출
+t_text %>% enc2native %>% words
+
+# 형태소 추출
+t_text %>% enc2native %>% token_morph
+t_text %>% pos(join=F)
+
+# =========================== #
+# dtm 생성
+# =========================== #
+library(data.table)
+library(dplyr)
+library(tm)
+library(slam)
+# library(stringr)
+
+# kor_morph <- kor_morph2
+# kor_morph[,word:=str_to_lower(word)]
+kor_morph <- kor_morph[,.N,by=list(doc_id,word)]
+
+# unique term/doc
+terms <- kor_morph[,list(word)] %>% unique %>% setorder(word) %>% .[,word]
+docs <- kor_morph[,list(doc_id)] %>% unique %>% setorder(doc_id) %>% .[,as.character(doc_id)]
+
+# make dtm
+m <- simple_triplet_matrix(i = chmatch(kor_morph[,word], terms),
+                           j = match(kor_morph[,doc_id], kor_morph[,unique(doc_id)]),
+                           v = kor_morph[,N],
+                           nrow = length(terms), ncol = length(docs),
+                           dimnames = list(Terms = terms, Docs = docs))
+rm(terms, docs)
+dtm <- t(as.TermDocumentMatrix(m, weighting = weightTf))
