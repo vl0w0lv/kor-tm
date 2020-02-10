@@ -1,4 +1,24 @@
 
+# python 설치
+## https://www.python.org/downloads/windows/ 
+## Windows x86-64 executable installer
+
+# rpy2 설치
+## https://www.lfd.uci.edu/~gohlke/pythonlibs/#rpy2
+## => rpy2-2.9.5-py3-none-win_amd64.whl 으로 파일명 변경
+
+## https://visualstudio.microsoft.com/ko/downloads/ 에서 visual studio 설치 => konlpy 설치 위해 필요함
+## Desktop development with C++(C++를 사용한 데스크톱 개발), Python development(Python 개발) 체크 후 설치
+
+## 자바 다운로드
+## https://www.java.com/ko/download/
+
+# module 설치
+# shell("curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py")
+# shell("python get-pip.py")
+# shell("pip install --upgrade setuptools")
+# shell("pip install rpy2-2.9.5-py3-none-win_amd64.whl") # <- 다운받은 rpy2 파일을 설치
+
 # 텍스트 생성
 t_text <- c("테스트입니다.", "어떤가요?")
 
@@ -8,6 +28,7 @@ t_text <- c("테스트입니다.", "어떤가요?")
 ## 파이썬 모듈 설치
 # shell("pip install nltk")
 # shell("pip install konlpy")
+# shell("pip install javabridge")
 # shell("pip install numpy")
 library(reticulate)
 library(data.table)
