@@ -108,7 +108,7 @@ library(slam)
 # kor_morph <- kor_morph2
 # kor_morph[,word:=str_to_lower(word)]
 
-# 단어 카운트
+# 문서별 단어 카운트
 kor_morph <- kor_morph[,.N,by=list(doc_id,word)]
 
 # unique term/doc
