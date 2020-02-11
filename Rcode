@@ -57,7 +57,7 @@ py_gc <- import("gc")
 py_gc$collect()
 
 # 결과값 정제(NN:명사, NP:대명사, VV:동사, VA:형용사, SL:외국어, SH:한자, SN:숫자)
-# 품사표 참조 : https://docs.komoran.kr/firststep/postypes.html
+## 품사표 참조 : https://docs.komoran.kr/firststep/postypes.html
 kor_morph <- lapply(text_r, function(x){
   o <- sapply(x, "[[", 1)
   names(o) <- sapply(x, "[[", 2)
