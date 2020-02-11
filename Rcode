@@ -96,7 +96,7 @@ t_text %>% enc2native %>% words
 
 # 형태소 추출
 t_text %>% enc2native %>% token_morph
-t_text %>% pos(join=F)
+t_text %>% enc2native %>% pos(join=F)
 
 # =========================== #
 # dtm 생성
