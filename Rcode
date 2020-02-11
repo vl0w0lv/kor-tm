@@ -7,7 +7,7 @@
 ## https://www.lfd.uci.edu/~gohlke/pythonlibs/#rpy2
 ## => rpy2-2.9.5-py3-none-win_amd64.whl 으로 파일명 변경
 
-# visualstudio 설치(konlpy 설치 위해 필요)
+# visual studio 설치(konlpy 설치 위해 필요)
 ## https://visualstudio.microsoft.com/ko/downloads/
 ## Desktop development with C++(C++를 사용한 데스크톱 개발), Python development(Python 개발) 체크 후 설치
 
