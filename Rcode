@@ -7,7 +7,8 @@
 ## https://www.lfd.uci.edu/~gohlke/pythonlibs/#rpy2
 ## => rpy2-2.9.5-py3-none-win_amd64.whl 으로 파일명 변경
 
-## https://visualstudio.microsoft.com/ko/downloads/ 에서 visual studio 설치 => konlpy 설치 위해 필요함
+# visualstudio 설치(konlpy 설치 위해 필요)
+## https://visualstudio.microsoft.com/ko/downloads/
 ## Desktop development with C++(C++를 사용한 데스크톱 개발), Python development(Python 개발) 체크 후 설치
 
 ## 자바 다운로드
@@ -17,9 +18,15 @@
 # shell("curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py")
 # shell("python get-pip.py")
 # shell("pip install --upgrade setuptools")
-# shell("pip install rpy2-2.9.5-py3-none-win_amd64.whl") # <- 다운받은 rpy2 파일을 설치
+
+## 다운받은 rpy2 파일을 설치
+# shell("pip install rpy2-2.9.5-py3-none-win_amd64.whl")
 
 # ------------------------------------------------------------------------------------------- #
+
+## 필요 패키지 설치
+# pkg <- c("reticulate", "data.table", "dplyr", "RcppMeCab", "tidytext", "RmecabKo", "tm", "slam", "stringr")
+# if(sum(!(pkg %in% rownames(installed.packages())))>0) {install.packages(setdiff(pkg, rownames(installed.packages())))}
 
 # 텍스트 생성
 t_text <- c("테스트입니다.", "어떤가요?")
