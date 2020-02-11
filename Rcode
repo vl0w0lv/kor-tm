@@ -74,8 +74,7 @@ library(RmecabKo)
 # install_mecab("C:/mecab")
 
 # set term/doc
-t_text <- enc2native(t_text)
-text_tab <- data.table(doc_id = seq_along(t_text), txt = t_text)
+text_tab <- data.table(doc_id = seq_along(t_text), txt = enc2native(t_text))
 kor_morph2 <- text_tab %>% unnest_tokens(word, txt, token=pos, to_lower=F)
 
 # 단어/품사 분리
