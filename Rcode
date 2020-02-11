@@ -115,14 +115,14 @@ kor_morph <- kor_morph[,.N,by=list(doc_id,word)]
 
 # unique term/doc
 terms <- kor_morph[,list(word)] %>% unique %>% setorder(word) %>% .[,word]
-docs <- kor_morph[,list(doc_id)] %>% unique %>% setorder(doc_id) %>% .[,as.character(doc_id)]
+docs <- kor_morph[,list(doc_id)] %>% unique %>% setorder(doc_id) %>% .[,doc_id]
 
 # make dtm
 m <- simple_triplet_matrix(i = chmatch(kor_morph[,word], terms),
-                           j = match(kor_morph[,doc_id], kor_morph[,unique(doc_id)]),
+                           j = match(kor_morph[,doc_id], docs),
                            v = kor_morph[,N],
                            nrow = length(terms), ncol = length(docs),
-                           dimnames = list(Terms = terms, Docs = docs))
+                           dimnames = list(Terms = terms, Docs = as.character(docs)))
 
 # weighting options ( weightTf / weightBin / weightTfIdf )
 dtm <- t(as.TermDocumentMatrix(m, weighting = weightTf))
