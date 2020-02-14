@@ -66,7 +66,7 @@ kor_morph <- lapply(text_r, function(x){
 
 # data.table로 변환
 kor_morph <- data.table(doc_id = rep(seq_along(kor_morph), times = sapply(kor_morph, length)),
-                         word = unlist(kor_morph), type = names(unlist(kor_morph)))
+                        word = unlist(kor_morph), type = names(unlist(kor_morph)))
 
 # =========================== #
 # 2. RcppMeCab 패키지 사용(은전한닢 프로젝트)
