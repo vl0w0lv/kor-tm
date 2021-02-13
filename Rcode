@@ -30,6 +30,7 @@
 
 # 텍스트 생성
 t_text <- c("테스트입니다.", "어떤가요?")
+# t_text <- "한글입니다."
 
 # =========================== #
 # 1. Komoran 모듈 사용(Python)
@@ -46,10 +47,14 @@ library(data.table)
 py_run_string(paste("from konlpy.tag import Komoran;", "komoran = Komoran();"))
 
 # 형태소 분석
-py_run_string("text_py = list(map(komoran.pos, r.t_text));")
-
+if(length(t_text) == 1){
+  py_run_string("text_py = komoran.pos(r.t_text);")
+}else{
+  py_run_string("text_py = list(map(komoran.pos, r.t_text));")
+}
 # R 객체로 결과값 불러오기
 text_r <- py$text_py
+if(length(t_text) == 1) text_r <- list(text_r)
 
 # garbage collection
 py_run_string("del text_py")
@@ -134,4 +139,3 @@ m <- simple_triplet_matrix(i = chmatch(kor_morph[,word], terms),
 # weighting options ( weightTf / weightBin / weightTfIdf )
 dtm <- t(as.TermDocumentMatrix(m, weighting = weightTf))
 # inspect(dtm)
-
