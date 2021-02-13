@@ -36,6 +36,7 @@ t_text <- c("테스트입니다.", "어떤가요?")
 # 1. Komoran 모듈 사용(Python)
 # =========================== #
 ## 파이썬 모듈 설치
+# shell("pip install JPype1")
 # shell("pip install nltk")
 # shell("pip install konlpy")
 # shell("pip install numpy")
