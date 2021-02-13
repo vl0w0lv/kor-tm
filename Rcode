@@ -25,7 +25,7 @@
 # ------------------------------------------------------------------------------------------- #
 
 ## 필요 패키지 설치
-# pkg <- c("reticulate", "data.table", "dplyr", "RcppMeCab", "tidytext", "RmecabKo", "tm", "slam", "stringr")
+# pkg <- c("reticulate", "data.table", "magrittr", "RcppMeCab", "tidytext", "RmecabKo", "tm", "slam", "stringr")
 # if(sum(!(pkg %in% rownames(installed.packages())))>0) {install.packages(setdiff(pkg, rownames(installed.packages())))}
 
 # 텍스트 생성
@@ -77,7 +77,7 @@ kor_morph <- data.table(doc_id = rep(seq_along(kor_morph), times = sapply(kor_mo
 # 2. RcppMeCab 패키지 사용(은전한닢 프로젝트)
 # =========================== #
 library(data.table)
-library(dplyr)
+library(magrittr)
 library(RcppMeCab)
 library(tidytext)
 library(RmecabKo)
@@ -98,7 +98,7 @@ kor_morph2[,word:=morph_tmp[[1]]]
 # 부록 : RmecabKo 패키지 사용
 # =========================== #
 library(RmecabKo)
-library(dplyr)
+library(magrittr)
 
 # 명사 추출
 t_text %>% enc2native %>% nouns
@@ -114,7 +114,7 @@ t_text %>% enc2native %>% pos(join=F)
 # dtm 생성
 # =========================== #
 library(data.table)
-library(dplyr)
+library(magrittr)
 library(tm)
 library(slam)
 # library(stringr)
