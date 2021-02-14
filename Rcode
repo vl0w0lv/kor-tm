@@ -90,7 +90,7 @@ kor_morph2 <- suppressWarnings({
 })
 
 # 단어/품사 분리
-kor_morph2 <- cbind(kor_morph2[,1],
+kor_morph2 <- cbind(kor_morph2[,1,with=F],
                     kor_morph2[,tstrsplit(word, "/", names = c("word", "type"))])
 
 # =========================== #
