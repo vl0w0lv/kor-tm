@@ -100,10 +100,11 @@ library(RmecabKo)
 library(magrittr)
 
 # 명사 추출
+t_text %>% enc2native %>% token_nouns
 t_text %>% enc2native %>% nouns
 
 # 단어 추출
-t_text %>% enc2native %>% words
+t_text %>% enc2native %>% token_words
 
 # 형태소 추출
 t_text %>% enc2native %>% token_morph
