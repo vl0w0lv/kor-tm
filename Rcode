@@ -88,9 +88,8 @@ text_tab <- data.table(doc_id = seq_along(t_text), txt = enc2utf8(t_text))
 kor_morph2 <- text_tab %>% unnest_tokens(word, txt, token = posParallel, to_lower = F)
 
 # 단어/품사 분리
-morph_tmp <- kor_morph2[,tstrsplit(word, "/")]
-kor_morph2[["type"]] <- morph_tmp[[2]]
-kor_morph2[,word:=morph_tmp[[1]]]
+morph_tmp <- kor_morph2[,tstrsplit(word, "/", names = c("word", "type"))]
+kor_morph2 <- cbind(kor_morph2[,1], morph_tmp)
 
 # =========================== #
 # 부록 : RmecabKo 패키지 사용
