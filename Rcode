@@ -80,7 +80,7 @@ library(magrittr)
 library(RcppMeCab)
 library(tidytext)
 
-## 최초 1번만 실행하여 설치 진행
+## 최초 1번만 실행하여 mecab 설치 진행
 # RmecabKo::install_mecab("C:/mecab")
 
 # set term/doc
