@@ -85,8 +85,8 @@ library(RmecabKo)
 # install_mecab("C:/mecab")
 
 # set term/doc
-text_tab <- data.table(doc_id = seq_along(t_text), txt = enc2native(t_text))
-kor_morph2 <- text_tab %>% unnest_tokens(word, txt, token = pos, to_lower = F)
+text_tab <- data.table(doc_id = seq_along(t_text), txt = enc2utf8(t_text))
+kor_morph2 <- text_tab %>% unnest_tokens(word, txt, token = posParallel, to_lower = F)
 
 # 단어/품사 분리
 morph_tmp <- kor_morph2[,tstrsplit(word, "/")]
@@ -107,7 +107,7 @@ t_text %>% enc2native %>% words
 
 # 형태소 추출
 t_text %>% enc2native %>% token_morph
-t_text %>% enc2native %>% pos(join=F)
+t_text %>% enc2utf8 %>% posParallel(join = F)
 
 # =========================== #
 # dtm 생성
