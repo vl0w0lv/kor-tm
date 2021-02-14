@@ -81,7 +81,7 @@ library(RcppMeCab)
 library(tidytext)
 
 ## 최초 1번만 실행하여 설치 진행
-# install_mecab("C:/mecab")
+# RmecabKo::install_mecab("C:/mecab")
 
 # set term/doc
 text_tab <- data.table(doc_id = seq_along(t_text), txt = enc2utf8(t_text))
