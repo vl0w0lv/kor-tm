@@ -14,7 +14,7 @@
 ## 자바 다운로드
 ## https://www.java.com/ko/download/
 
-## module 설치를 위한 세팅
+## 파이썬 module 설치를 위한 세팅
 # shell("curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py")
 # shell("python get-pip.py")
 # shell("pip install --upgrade setuptools")
