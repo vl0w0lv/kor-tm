@@ -79,7 +79,6 @@ library(data.table)
 library(magrittr)
 library(RcppMeCab)
 library(tidytext)
-library(RmecabKo)
 
 ## 최초 1번만 실행하여 설치 진행
 # install_mecab("C:/mecab")
